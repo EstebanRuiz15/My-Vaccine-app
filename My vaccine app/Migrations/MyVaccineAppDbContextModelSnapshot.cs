@@ -37,6 +37,213 @@ namespace My_vaccine_app.Migrations
                     b.ToTable("FamilyGroupUser");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("My_vaccine_app.Models.Allergy", b =>
                 {
                     b.Property<int>("AllergyId")
@@ -45,10 +252,16 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AllergyId"));
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -68,6 +281,9 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DependentId"));
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -75,6 +291,9 @@ namespace My_vaccine_app.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -94,10 +313,16 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FamilyGroupId"));
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("FamilyGroupId");
 
@@ -112,22 +337,29 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("Email")
+                    b.Property<string>("AspNetUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.ToTable("Users");
                 });
@@ -140,6 +372,9 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VaccineId"));
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -147,6 +382,9 @@ namespace My_vaccine_app.Migrations
 
                     b.Property<bool>("RequiresBooster")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("VaccineId");
 
@@ -161,10 +399,16 @@ namespace My_vaccine_app.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VaccineCategoryId"));
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("VaccineCategoryId");
 
@@ -189,11 +433,17 @@ namespace My_vaccine_app.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateAdministered")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DependentId")
+                    b.Property<int?>("DependentId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -227,6 +477,13 @@ namespace My_vaccine_app.Migrations
                     b.ToTable("VaccineCategoryVaccines", (string)null);
                 });
 
+            modelBuilder.Entity("My_vaccine_app.Models.AplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("AplicationUser");
+                });
+
             modelBuilder.Entity("FamilyGroupUser", b =>
                 {
                     b.HasOne("My_vaccine_app.Models.FamilyGroup", null)
@@ -238,6 +495,57 @@ namespace My_vaccine_app.Migrations
                     b.HasOne("My_vaccine_app.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -264,13 +572,23 @@ namespace My_vaccine_app.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("My_vaccine_app.Models.User", b =>
+                {
+                    b.HasOne("My_vaccine_app.Models.AplicationUser", "AspNetUser")
+                        .WithMany()
+                        .HasForeignKey("AspNetUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AspNetUser");
+                });
+
             modelBuilder.Entity("My_vaccine_app.Models.VaccineRecord", b =>
                 {
                     b.HasOne("My_vaccine_app.Models.Dependent", "Dependent")
                         .WithMany("VaccineRecords")
                         .HasForeignKey("DependentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("My_vaccine_app.Models.User", "User")
                         .WithMany("VaccineRecords")

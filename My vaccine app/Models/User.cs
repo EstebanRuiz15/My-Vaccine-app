@@ -1,11 +1,16 @@
-﻿namespace My_vaccine_app.Models;
+﻿using System.Text.Json.Serialization;
 
-    public class User
-    {
+namespace My_vaccine_app.Models;
+
+    public class User: TableBase
+{
         public int UserId { get; set; }
-        public required string UserName { get; set; }
-        public required string Email { get; set; }
-        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName{ get; set; }
+        [JsonIgnore]
+        public string AspNetUserId { get; set; }
+        [JsonIgnore]
+        public AplicationUser AspNetUser { get; set; }
         public List<Dependent> Dependents { get; set; }
         public List<FamilyGroup> FamilyGroups { get; set; }
         public List<VaccineRecord> VaccineRecords { get; set; }
