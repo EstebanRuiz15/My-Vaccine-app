@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using My_vaccine_app.Dtos.Allergies;
-using My_vaccine_app.Dtos.Dependent;
 using My_vaccine_app.Services.Contracts;
 using AllergyRequestDto = My_vaccine_app.Dtos.Allergies.AllergyRequestDto;
 

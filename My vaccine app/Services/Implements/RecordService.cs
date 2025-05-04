@@ -67,7 +67,9 @@ namespace My_vaccine_app.Services.Implements
         {
             var user= await _userService.GetUserInfo(email);
             int Userid= user.UserId;
-            var records = await _recordRepo.FindBy(x => x.UserId == Userid).ToListAsync();
+            var records = await _recordRepo.FindBy(x => x.UserId == Userid)
+                .Include(r => r.Vaccine)
+                .ToListAsync();
             return _mapper.Map<IEnumerable<RecordResponseDto>>(records);
         }
 

@@ -12,7 +12,7 @@ namespace My_vaccine_app.Dtos.VaccineRecord
         public int VaccineRecordId { get; set; }
         public UserDto User { get; set; }
         public DependentDto Dependent { get; set; }
-        public VaccineResponseDto Vaccine { get; set; }
+        public string Vaccine { get; set; }
         public DateTime DateAdministered { get; set; }
         public string AdministeredLocation { get; set; }
         public string AdministeredBy { get; set; }

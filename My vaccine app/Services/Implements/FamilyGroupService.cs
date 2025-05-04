@@ -83,6 +83,10 @@ namespace My_vaccine_app.Services.Implements
                 return null;
             }
             var family = await _familyRepo.FindBy(x => x.FamilyGroupId == user.FamilyGroups.First().FamilyGroupId).Include(x => x.Users) .ToListAsync();
+            foreach (var familyGroup in family)
+            {
+                familyGroup.Users.RemoveAll(u => u.UserId == user.UserId);
+            }
             var response = _mapper.Map<IEnumerable<GroupResponseDto>>(family);
             return response;
         }

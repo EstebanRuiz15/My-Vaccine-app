@@ -23,10 +23,10 @@ namespace My_vaccine_app.Configurations
             }).AddEntityFrameworkStores<MyVaccineAppDbContext>()
               .AddDefaultTokenProviders();
 
-            services.AddAuthentication(options =>
+            _ = services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme= JwtBearerDefaults.AuthenticationScheme; 
-                options.DefaultChallengeScheme= JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -35,10 +35,10 @@ namespace My_vaccine_app.Configurations
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable(MyVaccineLiterals.JWT_KEY)))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jsuiasAS23Xs@#2332SDcE@#2SDsDsSQ4543DSd"))
 
                 };
-            }) ;
+            });
             return services;
         }
     }

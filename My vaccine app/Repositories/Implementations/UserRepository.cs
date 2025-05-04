@@ -25,7 +25,6 @@ namespace My_vaccine_app.Repositories.Implementations
         {
             _userManager = userManager;
             _context = context;
-
         }
         public async Task<IdentityResult> addUser(RequestRegisterDto request)
         {
@@ -72,14 +71,15 @@ namespace My_vaccine_app.Repositories.Implementations
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 var user = await _userManager.FindByNameAsync(request.Username);
-
                 if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
                 {
+                    var appUser = await _context.Users.FirstOrDefaultAsync(u => u.AspNetUserId == user.Id);
                     var claims = new[]
                     {
                     new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim("id", appUser.UserId.ToString())
                 };
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable(MyVaccineLiterals.JWT_KEY)));
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jsuiasAS23Xs@#2332SDcE@#2SDsDsSQ4543DSd"));
                     var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                     var token = new JwtSecurityToken(

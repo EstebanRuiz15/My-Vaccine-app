@@ -33,7 +33,7 @@ namespace My_vaccine_app.Configurations
                 .ForMember(dest => dest.Categories, opt => opt.Ignore());
             CreateMap<Vaccine, VaccineResponseDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.VaccineId))
-            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories)).ReverseMap();
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories));
 
             CreateMap<List<string>, List<VaccineCategory>>()
       .ConvertUsing<StringToCategoryListConverter>();
@@ -67,8 +67,14 @@ namespace My_vaccine_app.Configurations
             CreateMap<User, UserDto>()
                 .ForMember(dest => dest.Allergies, opt => opt.MapFrom(src => src.Allergies)); 
             CreateMap<Dependent, DependentDto>();
-            CreateMap<Vaccine, VaccineResponseDto>()
-                .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories));
+
+           CreateMap<VaccineRecord, RecordResponseDto>()
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
+                .ForMember(dest => dest.Dependent, opt => opt.MapFrom(src => src.Dependent))
+                .ForMember(dest => dest.Vaccine, opt => opt.MapFrom(src => src.Vaccine.Name)) 
+                .ForMember(dest => dest.DateAdministered, opt => opt.MapFrom(src => src.DateAdministered))
+                .ForMember(dest => dest.AdministeredLocation, opt => opt.MapFrom(src => src.AdministeredLocation))
+                .ForMember(dest => dest.AdministeredBy, opt => opt.MapFrom(src => src.AdministeredBy));
 
         }
     }
