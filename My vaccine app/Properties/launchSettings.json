@@ -1,0 +1,26 @@
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8080/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "JWT_KEY": "jsuiasAS23Xs@#2332SDcE@#2SDsDsSQ4543DSd",
+        "MY_VACCINE_CONECTION": "Server=DESKTOP-JLC71V1;Database=my_vaccine;Trusted_Connection=True;TrustServerCertificate=True;",
+        "ASPNETCORE_URLS": "http://0.0.0.0:8080"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://0.0.0.0:8080" 
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:8080", 
+      "sslPort": 0 
+    }
+  }
+}
